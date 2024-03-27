@@ -1,52 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import {
-  type EdgeInsets,
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { HomeScreen } from "./screens/HomeScreen";
 
-function AppWithContext() {
-  const insets = useSafeAreaInsets();
-
-  return (
-    <View style={styles({ insets }).container}>
-      <StatusBar style="auto" />
-      <ScrollView>
-        {Array(200)
-          .fill(1)
-          .map((_v, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <Text key={index}>{`SUDO WGET LOCALHOST ${index}`}</Text>
-          ))}
-      </ScrollView>
-    </View>
-  );
-}
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <AppWithContext />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            options={{ headerShown: false }}
+            component={HomeScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }
-
-type StylesProps = {
-  insets: EdgeInsets;
-};
-
-const styles = ({ insets }: StylesProps) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-      // safe area insets
-      paddingTop: insets.top,
-      paddingBottom: insets.bottom,
-      paddingLeft: insets.left,
-      paddingRight: insets.right,
-    },
-  });
