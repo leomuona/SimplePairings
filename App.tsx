@@ -1,9 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { HomeScreen } from "./screens/HomeScreen";
+import type { RootStackParamList } from "./model/navigation";
+import { Home } from "./screens/Home";
+import { NewTournament } from "./screens/NewTournament";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -13,7 +15,12 @@ export default function App() {
           <Stack.Screen
             name="Home"
             options={{ headerShown: false }}
-            component={HomeScreen}
+            component={Home}
+          />
+          <Stack.Screen
+            name="NewTournament"
+            options={{ headerTitle: "Uusi turnaus" }}
+            component={NewTournament}
           />
         </Stack.Navigator>
       </NavigationContainer>

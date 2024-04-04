@@ -8,12 +8,18 @@ import { colors } from "../design";
 
 type Props = {
   children?: React.ReactNode;
+  hiddenHeader?: boolean;
 };
 
-export function SafeView({ children }: Props) {
+export function SafeView({ children, hiddenHeader }: Props) {
   const insets = useSafeAreaInsets();
   return (
-    <View style={styles({ insets }).container}>
+    <View
+      style={
+        styles({ insets: { ...insets, top: hiddenHeader ? insets.top : 0 } })
+          .container
+      }
+    >
       <StatusBar style="auto" />
       {children}
     </View>
