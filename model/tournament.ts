@@ -1,9 +1,6 @@
-import type { Player } from "./player";
-
 export type Tournament = {
   id: string;
-  date: Date;
+  date: string;
   name: string;
-  players: Player[];
   rounds: number;
 };

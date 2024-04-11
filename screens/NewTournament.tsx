@@ -5,14 +5,16 @@ import {
   NewTournamentForm,
 } from "../components/forms/NewTournamentForm";
 import type { RootStackParamList } from "../model/navigation";
+import { useAppDispatch } from "../store/hooks";
+import { addTournament } from "../store/tournamentsSlice";
 
 type Props = NativeStackScreenProps<RootStackParamList, "NewTournament">;
 
 export function NewTournament({ navigation }: Props) {
-  const onSubmit = (formData: FormData) => {
-    // TODO GLOBAL STATE THING
-    console.log(formData);
+  const dispatch = useAppDispatch();
 
+  const onSubmit = (formData: FormData) => {
+    dispatch(addTournament(formData.name, formData.date, formData.rounds));
     navigation.navigate("Home");
   };
 
